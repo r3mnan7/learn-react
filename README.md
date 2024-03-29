@@ -309,6 +309,14 @@ console.log(todos);
 
 ## React Fundamentals
 
+### Inline CSS
+
+Inline CSS in JSX needs two sets of curly braces:
+
+```
+<button style={{ backgroundColor: "#7590F2" }}>Previous</button>
+```
+
 ### Prop Passing
 
 Remember whenever I do prop passing like this:
