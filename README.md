@@ -311,7 +311,7 @@ console.log(todos);
 
 ### Prop Passing
 
-Remember whenever I do this thing:
+Remember whenever I do prop passing like this:
 
 ```
 function SkillList() {
