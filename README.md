@@ -304,3 +304,34 @@ so do all the things inside the async function rather than doing all the return 
 const todos = getTodos();
 console.log(todos);
 ```
+
+## React Fundamentals
+
+Remember whenever I do this thing:
+
+```
+function SkillList() {
+  return (
+    <div className="skill-list">
+      {skills.map((skill) => (
+        <Skill skillObject={skill} key={skill.skill} />
+      ))}
+    </div>
+  );
+}
+
+function Skill({ skillObject }) {
+  return (
+    <div className="skill" style={{ backgroundColor: skillObject.color }}>
+      <span>{skillObject.skill}</span>
+      <span>
+        {skillObject.level === "beginner" && "👶"}
+        {skillObject.level === "intermediate" && "👍"}
+        {skillObject.level === "advanced" && "💪"}
+      </span>
+    </div>
+  );
+}
+```
+
+That Skill(skillObject) will not return anything, I need to wrap it in curly brackets inside the parens.
