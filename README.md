@@ -1,5 +1,26 @@
 # Notes from the React Course
 
+- [Javascript Fundamentals](#javascript-fundamentals)
+- [Destructuring](#destructuring)
+- [Ternaries](#ternaries)
+- [Traditional vs. Arrow Functions](#traditional-vs-arrow-functions)
+  - [Traditional Function](#traditional-function)
+  - [Arrow Function](#arrow-function)
+- [Template literals](#template-literals)
+- [Short circuiting](#short-circuiting)
+  - [&& Operator](#-operator)
+  - [|| operator](#-operator-1)
+  - [Nullish coalescing operator](#nullish-coalescing-operator)
+- [Array Methods](#array-methods)
+  - [Map](#map)
+  - [Filter](#filter)
+  - [Array Method Chaining](#array-method-chaining)
+  - [Reduce](#reduce)
+  - [Sort](#sort)
+  - [Immutable Arrays](#immutable-arrays)
+- [Promises](#promises)
+- [Async/Await](#asyncawait)
+
 These are not my individual notes on how to work with Javascript and React, but more overall concepts that I think might snag me up later down the line. This document serves to be a quick reference when working with React as a new skill.
 
 ## Javascript Fundamentals
