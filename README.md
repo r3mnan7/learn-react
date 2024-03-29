@@ -20,6 +20,7 @@
     - [Immutable Arrays](#immutable-arrays)
   - [Promises](#promises)
   - [Async/Await](#asyncawait)
+- [React Fundamentals](#react-fundamentals)
 
 These are not my individual notes on how to work with Javascript and React, but more overall concepts that I think might snag me up later down the line. This document serves to be a quick reference when working with React as a new skill.
 
