@@ -258,21 +258,22 @@
 
 ### Async/Await
 
-    With the await keyword in an async function, we pause the code inside the function and wait on the previous async. When calling the function the rest of the code proceeds as normal, but pausing happens inside the function.
+With the await keyword in an async function, we pause the code inside the function and wait on the previous async. When calling the function the rest of the code proceeds as normal, but pausing happens inside the function.
 
-    ```
-    async function getTodos() {
-    const response = await fetch("https:jsonplaceholder.typicode.com/todos");
-    const data = await response.json();
-    console.log(data);
-    return data;
-    }
-    getTodos();
-    ```
-    if we take the output of the async function we make another promise that requires the .then methods all over again
-    so do all the things inside the async function rather than doing all the return and .then redundancy.
+```
+async function getTodos() {
+const response = await fetch("https:jsonplaceholder.typicode.com/todos");
+const data = await response.json();
+console.log(data);
+return data;
+}
+getTodos();
+```
 
-    ```
-    const todos = getTodos();
-    console.log(todos);
-    ```
+if we take the output of the async function we make another promise that requires the .then methods all over again
+so do all the things inside the async function rather than doing all the return and .then redundancy.
+
+```
+const todos = getTodos();
+console.log(todos);
+```
