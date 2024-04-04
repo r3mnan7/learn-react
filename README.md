@@ -348,3 +348,53 @@ function Skill({ skillObject }) {
 ```
 
 That Skill(skillObject) will not return anything, I need to wrap it in curly brackets inside the parens.
+
+### State
+
+#### Declare a State Variable
+
+```
+const [step, setStep] = useState(1);
+```
+
+The hook (second element in the array) should always be set(Something).
+
+#### Updating State
+
+Do not _update_ state manually like this:
+
+```
+function handlePrevious() {
+    if (step > 1) setStep(step = step + 1);
+  }
+```
+
+Instead create a callback function for handling state updates and pass the current value like this:
+
+```
+function handlePrevious() {
+    if (step > 1) setStep((s) => s - 1);
+  }
+```
+
+This does not apply to setting state, which can be performed directly:
+
+```
+setTest({ name: "R3mnan7"});
+```
+
+#### Tips and Guidelines
+
+Each component manages it's own state. Each component instance operates independent from the others.
+
+Use a state variable for any data that the component should keep track of ("remember") over time. **This is data that will change at some point**. In Vanilla JS, that's a let variable, or and [] or {}.
+
+Whenever you want something in the component to be **dynamic**, create a piece of state related to that "thing" and update the state when the "thing" should change.
+
+**_Example_**: A modal window can be opened or closed. So we create a state variable isOpen that tracks wwhether the modal is open or not. In isOpen = true we display the window, on isOpen = false, we hide it.
+
+If you want to change the way a component looks, or the data it displays, **update its state**. This usually happens in an **event handler** function.
+
+When building components, imagine its view as a **reflection of state over time**.
+
+For data that should not trigger component re-renders, **don't use state**. Use a regular variable instead.
