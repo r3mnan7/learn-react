@@ -23,6 +23,10 @@
 - [React Fundamentals](#react-fundamentals)
   - [Inline CSS](#inline-css)
   - [Prop Passsing](#prop-passing)
+  - [State](#state)
+    - [Declare a State Variable](#declare-a-state-variable)
+    - [Updating State](#updating-state)
+    - [Tips and Guidelines](#tips-and-guidelines)
 
 These are not my individual notes on how to work with Javascript and React, but more overall concepts that I think might snag me up later down the line. This document serves to be a quick reference when working with React as a new skill.
 
