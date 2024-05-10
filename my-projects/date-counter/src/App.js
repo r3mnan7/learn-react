@@ -16,30 +16,54 @@ function Counter() {
   const date = new Date();
   date.setDate(date.getDate() + count);
 
+  function handleReset() {
+    setStep(1);
+    setCount(0);
+  }
+  function formatCount(count) {
+    const absCount = Math.abs(count);
+    if (absCount < 365) {
+      return `${absCount} days`;
+    } else {
+      const years = Math.floor(absCount / 365);
+      const days = absCount % 365;
+      return `${years} years and ${days} days`;
+    }
+  }
   return (
     <>
       <div className="step">
-        <button onClick={() => setStep((c) => c - 10)}>--</button>
-        <button onClick={() => setStep((c) => c - 1)}>-</button>
+        <input
+          type="range"
+          min="1"
+          max="365"
+          value={step}
+          onChange={(e) => setStep(Number(e.target.value))}
+        />
         <span> Step: {step} </span>
-        <button onClick={() => setStep((c) => c + 1)}>+</button>
-        <button onClick={() => setStep((c) => c + 10)}>++</button>
-        <button onClick={() => setStep((c) => 0)}>Reset</button>
       </div>
       <div className="count">
         <button onClick={() => setCount((c) => c - step)}>-</button>
-        <span> Count: {count} </span>
+        <input
+          type="text"
+          value={count}
+          onChange={(e) => setCount(Number(e.target.value))}
+        />
         <button onClick={() => setCount((c) => c + step)}>+</button>
-        <button onClick={() => setCount((c) => 0)}>Reset</button>
       </div>
       <div className="output">
         {count === 0
           ? "Today is "
           : count > 0
-          ? `${count} days from today is `
-          : `${Math.abs(count)} days ago was `}
+          ? `${formatCount(count)} from today is `
+          : `${formatCount(count)} ago was `}
         <span>{date.toDateString()}</span>
       </div>
+      {Math.abs(count) !== 0 ? (
+        <div>
+          <button onClick={handleReset}>Reset</button>{" "}
+        </div>
+      ) : null}
     </>
   );
 }
