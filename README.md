@@ -28,6 +28,10 @@
     - [Updating State](#updating-state)
     - [Tips and Guidelines](#tips-and-guidelines)
 - [Unsorted and Miscellaneous Notes](#unsorted-and-miscellaneous-notes)
+  - [Trick for Dynamic Array Creation](#trick-for-dynamic-array-creation)
+  - [Prevent Reload when Submitting a Form](#prevent-reload-when-submitting-a-form)
+  - [On Forms vs Buttons](#on-forms-vs-buttons)
+  - [Controlled Elements](#controlled-elements)
 
 These are not my individual notes on how to work with Javascript and React, but more overall concepts that I think might snag me up later down the line. This document serves to be a quick reference when working with React as a new skill.
 
