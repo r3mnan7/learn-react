@@ -422,6 +422,51 @@ Whenever a piece of state is passed as a prop, when the state is changed both co
 
 While state is used to make components interactive, props are used to give parent comopnents the ability to configure child components. Props can be seen as settings in child components which the parent component can manage.
 
+## Thinking in React
+
+Thinking in react is a core skill. Need to learn how to work with the react API and think in react in order to get in the "react mindset". Thinking in react means having a good mental model about using components, state, data flow, effects, etc. It's also about think in state transitions rather than element mutations.
+
+### The "Thinking in React" Process
+
+This is not a rigid process, but this is the basic process for thinking in react
+
+1. Break the desired UI into components and establish a component tree.
+2. Build a static version in React (without state)
+3. Think about state:
+   - when to use state
+   - what types of state (local v global)
+   - where to place each piece of state
+4. Establish data flow:
+   - One-way data flow
+   - Child-to-parent communication
+   - Accessing global state
+
+Steps 3 and 4 in the thinking in this process comprise state management.
+
+### State Management
+
+Deciding **when** to create pieces of state, what **types** of state are necessary, **where** to place each piece of state, and how data **flows** through the app.
+
+As an application grows, finding a home for each piece of state is important.
+
+#### Types of State (Local v Global)
+
+_Should always start with local state, and move to global if it's needed_
+
+##### Local State
+
+- State needed only by one or few components.
+- State that is defined in a component and **only that component and child components have access to it**
+
+##### Global State
+
+- State that **many components** might need.
+- **Shared** state that is accessible to every **component** in the entire application.
+
+#### When and Where to Use State
+
+![WhenWhereState](./files/React-State-WhenWhere.png)
+
 ## Unsorted and Miscellaneous Notes
 
 When rendering an array in react, you always need to pass in a key, like this:
