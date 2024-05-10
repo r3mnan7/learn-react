@@ -29,10 +29,18 @@ _These are my notes from [The Ultimate React Course 2024: React, Redux & More](h
     - [Declare a State Variable](#declare-a-state-variable)
     - [Updating State](#updating-state)
     - [Tips and Guidelines](#tips-and-guidelines)
+    - [What's the Difference Between _State_ and _Props_?](#whats-the-difference-between-state-and-props)
+- [Thinking in React](#thinking-in-react)
+  - [The "Thinking in React" Process](#the-thinking-in-react-process)
+  - [State Management](#state-management)
+    - [Types of State (Local v Global)](#types-of-state-local-v-global)
+    - [When and Where to Use State](#when-and-where-to-use-state)
+    - [Lifting State](#lifting-state)
 - [Unsorted and Miscellaneous Notes](#unsorted-and-miscellaneous-notes)
   - [Trick for Dynamic Array Creation](#trick-for-dynamic-array-creation)
   - [Prevent Reload when Submitting a Form](#prevent-reload-when-submitting-a-form)
   - [On Forms vs Buttons](#on-forms-vs-buttons)
+  - [Arrow Functions for Calling Functions on Inputs](#arrow-functions-for-calling-functions-on-inputs)
   - [Controlled Elements](#controlled-elements)
 
 These are not my individual notes on how to work with Javascript and React, but more overall concepts that I think might snag me up later down the line. This document serves to be a quick reference when working with React as a new skill.
@@ -469,7 +477,63 @@ _Should always start with local state, and move to global if it's needed_
 
 #### Lifting State
 
-When a piece of state is used
+Becasue react uses one-way data flow, when a piece of state must be used by multiple sibling components, you must move/create the piece of state in **the first common parent** of the components. You need to give any components modifying the piece of state a function to perform that modification. Any function acting on the piece of lifted state must be located in the same component as the state variable and passed to the child components as props.
+
+Typical naming convention for the passed function is similar to vanilla JS (on(Verb)(StateVariable)) as shown in the code example below.
+
+```
+// Declare the state variable and setter in the default App function and pass the piece of state and any update function as props
+export default function App() {
+  const [items, setItems] = useState([]);
+
+  function handleAddItems(item) {
+    setItems((items) => [...items, item]);
+  }
+
+return (
+    <div className="app">
+      <Logo />
+      <Form onAddItems={handleAddItems} /> // The prop for the items state in this case is onAddItems
+      <PackingList items={items} />
+      <Stats />
+    </div>
+  );
+}
+
+// Read the value from props as normal
+function PackingList({ items }) {
+  return (
+    <div className="list">
+      <ul>
+        {items.map((item) => (
+          <Item item={item} key={item.id} />
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+// Pass onAddItems as a prop and reference the function like normal
+function Form({ onAddItems }) {
+  const [description, setDescription] = useState("");
+  const [quantity, setQuantity] = useState(1);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    if (!description) return;
+
+    const newItem = { description, quantity, packed: false, id: Date.now() };
+    console.log(newItem);
+
+    onAddItems(newItem);
+
+    setDescription("");
+    setQuantity(1);
+  }
+```
+
+_Reference the [travel-list](https://github.com/r3mnan7/learn-react/blob/main/my-projects/travel-list/src/App.js) project for full context_
 
 ## Unsorted and Miscellaneous Notes
 
@@ -504,6 +568,20 @@ Can use this trick to create a dynamic array from a range of numbers (probably m
 ### On Forms vs Buttons
 
 Can make submitting a form easier by using onSubmit in the form rather than using onClick to submit the form, this allows hitting enter to submit rather than _just_ clicking on the button.
+
+### Arrow Functions for Calling Functions on Inputs
+
+When you call a function like below (without arrow function) within an input, it calls the function immediately.
+
+```
+<button onClick={onDeleteItem(item.id)}>❌&times;</button>
+```
+
+Instead when calling the function on the input, wrap it in an arrow function to ensure the function is only called when the event is triggered
+
+```
+<button onClick={() => onDeleteItem(item.id)}>❌&times;</button>
+```
 
 ### Controlled Elements
 
