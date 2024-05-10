@@ -27,6 +27,7 @@
     - [Declare a State Variable](#declare-a-state-variable)
     - [Updating State](#updating-state)
     - [Tips and Guidelines](#tips-and-guidelines)
+- [Unsorted and Miscellaneous Notes](#unsorted-and-miscellaneous-notes)
 
 These are not my individual notes on how to work with Javascript and React, but more overall concepts that I think might snag me up later down the line. This document serves to be a quick reference when working with React as a new skill.
 
@@ -402,3 +403,94 @@ If you want to change the way a component looks, or the data it displays, **upda
 When building components, imagine its view as a **reflection of state over time**.
 
 For data that should not trigger component re-renders, **don't use state**. Use a regular variable instead.
+
+Data can only move down the component tree, not up or sideways.
+
+#### What's the Difference Between _State_ and _Props_?
+
+State is internal data owned by the component, props are external data owned by the parent component.
+
+Props are read-only, but receiving new props causes the component to re-render. Usually when the parent's state has been updated.
+
+Whenever a piece of state is passed as a prop, when the state is changed both components re-render.
+
+While state is used to make components interactive, props are used to give parent comopnents the ability to configure child components. Props can be seen as settings in child components which the parent component can manage.
+
+## Unsorted and Miscellaneous Notes
+
+When rendering an array in react, you always need to pass in a key, like this:
+
+```
+<Skill skillObject={skill} key={skill.skill} />
+```
+
+### Trick for Dynamic Array Creation
+
+Can use this trick to create a dynamic array from a range of numbers (probably more uses).
+
+```
+<select>
+  {Array.from({ length: 20 }, (_, i) => i + 1).map((num) => (
+    <option value={num} key={num}>
+      {num}
+    </option>
+  ))}
+</select>
+```
+
+### Prevent Reload when Submitting a Form
+
+```
+  function handleSubmit(e) {
+    e.preventDefault();
+  }
+```
+
+### On Forms vs Buttons
+
+Can make submitting a form easier by using onSubmit in the form rather than using onClick to submit the form, this allows hitting enter to submit rather than _just_ clicking on the button.
+
+### Controlled Elements
+
+By default, input fields maintain their own state inside the DOM. This makes it hard to read their values and leaves their state in the DOM, which is not ideal. In react it is better to keep state in the react app rather than the DOM, to handle this we use controlled elements.
+
+In order to implement controlled elements, follow three steps:
+
+1. Create a piece of state
+
+```
+const [description, setDescription] = useState
+```
+
+2. Use that state as the value of the input field
+
+```
+<input type="text" placeholder="Item..." value={description} />
+```
+
+3. Connect the state with the value being input
+
+```
+<input
+        type="text"
+        placeholder="Item..."
+        value={description}
+        onChange={(e) => setDescription(e.target.value)} // Target returns the element, in our case the input, which we pull the value from.
+      />
+```
+
+Another example
+
+```
+ const [quantity, setQuantity] = useState(1);
+
+ <select value={quantity} onChange={(e) => setQuantity(Number(e.target.value))}>
+        {Array.from({ length: 20 }, (_, i) => i + 1).map((num) => (
+          <option value={num} key={num}>
+            {num}
+          </option>
+        ))}
+      </select>
+```
+
+_e.target.value always returns a string_
