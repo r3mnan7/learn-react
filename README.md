@@ -473,7 +473,7 @@ _Should always start with local state, and move to global if it's needed_
 
 #### When and Where to Use State
 
-![WhenWhereState](./files/React-State-WhenWhere.png)
+![WhenWhereState](./files/React_State-WhenWhere.png)
 
 #### Lifting State
 
