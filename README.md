@@ -467,6 +467,10 @@ _Should always start with local state, and move to global if it's needed_
 
 ![WhenWhereState](./files/React-State-WhenWhere.png)
 
+#### Lifting State
+
+When a piece of state is used
+
 ## Unsorted and Miscellaneous Notes
 
 When rendering an array in react, you always need to pass in a key, like this:
