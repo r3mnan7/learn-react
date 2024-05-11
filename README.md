@@ -357,7 +357,9 @@ This is not a rigid process, but this is the basic process for thinking in react
 
 Steps 3 and 4 in the thinking in this process comprise state management.
 
-### Prop Passing
+### Props
+
+#### Prop Passing
 
 Remember whenever I do prop passing like this:
 
@@ -386,7 +388,100 @@ function Skill({ skillObject }) {
 }
 ```
 
-That Skill(skillObject) will not return anything, I need to wrap it in curly brackets inside the parens.
+that Skill(skillObject) will not return anything, I need to wrap it in curly brackets inside the parens.
+
+#### The "children" Prop
+
+Starting from here
+
+```
+function Button({ textColor, bgColor, onClick, text, emoji }) {
+  return (
+    <button
+      style={{ backgroundColor: bgColor, color: textColor }}
+      onClick={onClick}
+    >
+      <span>{emoji}</span>
+      {text}
+    </button>
+  );
+}
+
+<div className="buttons">
+          <Button
+            textColor="#fff"
+            bgColor="#7950f2"
+            onClick={handlePrevious}
+            text="Previous"
+            emoji="👈"
+          />
+
+          <Button
+            textColor="#fff"
+            bgColor="#7950f2"
+            onClick={handleNext}
+            text="Next"
+            emoji="👉"
+          />
+        </div>
+```
+
+we can simplify the process of passing the text and emoji, like so:
+
+```
+          <div className="buttons">
+            <Button textColor="#fff" bgColor="#7950f2" onClick={handlePrevious}>
+              <span>👈</span> Previous
+            </Button>
+
+            <Button textColor="#fff" bgColor="#7950f2" onClick={handleNext}>
+              <span>👉</span> Next
+            </Button>
+          </div>
+```
+
+Yet this yields unexpected results (in our care the span content and Next/Previous text fail to render in our button).
+
+To fix this we use the **children prop**.
+
+The children prop is a prop that each react component automatically receives. The value is exactly what's between the opening and closing tag of the component. So in order to make this work we have to also do the following within our component:
+
+```
+function Button({ textColor, bgColor, onClick, children }) {
+  return (
+    <button
+      style={{ backgroundColor: bgColor, color: textColor }}
+      onClick={onClick}
+    >
+      {children}
+    </button>
+  );
+```
+
+This now allows us to use our components as if they were traditional HTML elements.
+
+These components can be used anywhere, including the App parent function:
+
+```
+export default function App() {
+  return (
+    <div>
+      <Steps />
+      <StepMessage step={1}>
+        <p>Pass in content</p>
+        <p>🍆</p>
+      </StepMessage>
+      <StepMessage step={1}>
+        <p>Read children prop</p>
+        <p>😂</p>
+      </StepMessage>
+      {/* {<Steps />} */}
+    </div>
+  );
+}
+```
+
+See the [steps](https://github.com/r3mnan7/learn-react/blob/main/my-projects/steps/src/App.js) project for full context.
 
 ### State
 
@@ -565,6 +660,49 @@ For data that should not trigger component re-renders, **don't use state**. Use 
 Data can only move down the component tree, not up or sideways.
 
 ### Components
+
+#### Re-using Components in Components
+
+This is probably obvious, but I thought this was neat. You can declare a component like this:
+
+```
+function Button({ textColor, bgColor, onClick, text }) {
+  return (
+    <button
+      style={{ backgroundColor: bgColor, color: textColor }}
+      onClick={onClick}
+    >
+      {text}
+    </button>
+  );
+}
+```
+
+and then re-use it in other components like this:
+
+```
+<div className="buttons">
+            <Button
+              textColor="#fff"
+              bgColor="#7950f2"
+              onClick={handlePrevious}
+              text="Previous"
+            />
+
+            <Button
+              textColor="#fff"
+              bgColor="#7950f2"
+              onClick={handleNext}
+              text="Next"
+            />
+          </div>
+```
+
+totally simplifying the creation of buttons.
+
+There is obviously a ton more simplification that could be done, such as making types of buttons with similar stylings or whatever, but I thought this was cool and wanted to write it down.
+
+For more see [the children prop](#the-children-prop)
 
 #### Passing Props in Nested Components
 
