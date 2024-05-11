@@ -1,4 +1,4 @@
-_These are my notes from [The Ultimate React Course 2024: React, Redux & More](https://www.udemy.com/course/the-ultimate-react-course/?kw=react&src=sac&couponCode=KEEPLEARNING). ALL credit goes to [Jonas Schmedtmann](https://github.com/jonasschmedtmann)_
+These are not my individual notes on how to work with Javascript and React, but more overall concepts that I think might snag me up later down the line. This document serves to be a quick reference when working with React as a new skill.
 
 # Notes from the React Course
 
@@ -12,7 +12,7 @@ _These are my notes from [The Ultimate React Course 2024: React, Redux & More](h
   - [Template literals](#template-literals)
   - [Short circuiting](#short-circuiting)
     - [&& Operator](#-operator)
-    - [|| operator](#-operator-1)
+    - [|| operator](#-operator)
     - [Nullish coalescing operator](#nullish-coalescing-operator)
   - [Array Methods](#array-methods)
     - [Map](#map)
@@ -24,32 +24,37 @@ _These are my notes from [The Ultimate React Course 2024: React, Redux & More](h
   - [Promises](#promises)
   - [Async/Await](#asyncawait)
 
-- [React Fundamentals](#react-fundamentals)
+- [React](#react)
 
-  - [Inline CSS](#inline-css)
+  - [Thinking in React](#thinking-in-react)
+    - [The "Thinking in React" Process](#the-thinking-in-react-process)
   - [Prop Passing](#prop-passing)
   - [State](#state)
+    - [What's the Difference Between _State_ and _Props_?](#whats-the-difference-between-state-and-props)
     - [Declare a State Variable](#declare-a-state-variable)
     - [Updating State](#updating-state)
-    - [Tips and Guidelines](#tips-and-guidelines)
-    - [What's the Difference Between _State_ and _Props_?](#whats-the-difference-between-state-and-props)
-
-- [Thinking in React](#thinking-in-react)
-
-  - [The "Thinking in React" Process](#the-thinking-in-react-process)
-  - [State Management](#state-management)
+    - [State Management](#state-management)
     - [Types of State (Local v Global)](#types-of-state-local-v-global)
+      - [Local State](#local-state)
+      - [Global State](#global-state)
     - [When and Where to Use State](#when-and-where-to-use-state)
     - [Lifting State](#lifting-state)
+    - [Derived State](#derived-state)
+    - [Tips and Guidelines (State)](#tips-and-guidelines-state)
+  - [Components](#components)
+    - [Passing Props in Nested Components](#passing-props-in-nested-components)
+    - [Managing Components in Separate Files](#managing-components-in-separate-files)
 
-- [Unsorted and Miscellaneous Notes](#unsorted-and-miscellaneous-notes)
+- [Miscellaneous Notes](#miscellaneous-notes)
+  - [Inline CSS](#inline-css)
+  - [Render Arrays with a Key](#render-arrays-with-a-key)
   - [Trick for Dynamic Array Creation](#trick-for-dynamic-array-creation)
   - [Prevent Reload when Submitting a Form](#prevent-reload-when-submitting-a-form)
   - [On Forms vs Buttons](#on-forms-vs-buttons)
   - [Arrow Functions for Calling Functions on Inputs](#arrow-functions-for-calling-functions-on-inputs)
   - [Controlled Elements](#controlled-elements)
 
-These are not my individual notes on how to work with Javascript and React, but more overall concepts that I think might snag me up later down the line. This document serves to be a quick reference when working with React as a new skill.
+_Taken from [The Ultimate React Course 2024: React, Redux & More](https://www.udemy.com/course/the-ultimate-react-course/?kw=react&src=sac&couponCode=KEEPLEARNING). ALL credit goes to [Jonas Schmedtmann](https://github.com/jonasschmedtmann)_
 
 ## Javascript Fundamentals
 
@@ -389,7 +394,7 @@ That Skill(skillObject) will not return anything, I need to wrap it in curly bra
 
 ### State
 
-### What's the Difference Between _State_ and _Props_?
+#### What's the Difference Between _State_ and _Props_?
 
 State is internal data owned by the component, props are external data owned by the parent component.
 
@@ -431,7 +436,7 @@ This does not apply to setting state, which can be performed directly:
 setTest({ name: "R3mnan7"});
 ```
 
-### State Management
+#### State Management
 
 Deciding **when** to create pieces of state, what **types** of state are necessary, **where** to place each piece of state, and how data **flows** through the app.
 
@@ -545,7 +550,7 @@ The `cart` state acts as a single source of truth for the related data, and when
 
 Sorting one array can be derived from another array.
 
-### Tips and Guidelines (State)
+#### Tips and Guidelines (State)
 
 Each component manages it's own state. Each component instance operates independent from the others.
 
@@ -563,9 +568,9 @@ For data that should not trigger component re-renders, **don't use state**. Use 
 
 Data can only move down the component tree, not up or sideways.
 
-## Components
+### Components
 
-### Passing Props in Nested Components
+#### Passing Props in Nested Components
 
 For nested components, you need to pass the function all the way down the tree, **in sequence** (this tripped me up so that's why it's here).
 
@@ -628,7 +633,7 @@ function Item({ item, onDeleteItem, onToggleItem }) { // HERE
 
 Where I messed this up was passing it to the PackingList as a function param, but not to pass it to item in the line `onToggleItem={onToggleItem}`. You have to destructure the props in packing list, pass to the item component, then destructure it again, then pass it to the JSX.
 
-### Managing Components in Separate Files
+#### Managing Components in Separate Files
 
 Create separate files under the `src` directory for each component (i.e. `Logo.js`), then write the function as a `export default` function:
 
@@ -654,7 +659,7 @@ Also need to make sure any needed imports are included in the component file (th
 
 _Reference the file structure in [travel-list](https://github.com/r3mnan7/learn-react/blob/main/my-projects/travel-list/src/App.js) for more context_
 
-#### Automagic
+##### Automagic
 
 If an `App.js` has already been created with numerous components, VSCode has a refactor option to create separate files automatically. Simply highlight the entire function, right click > refactor, then click _Move to a new file_.
 
