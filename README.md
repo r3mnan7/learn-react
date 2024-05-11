@@ -3,6 +3,7 @@ _These are my notes from [The Ultimate React Course 2024: React, Redux & More](h
 # Notes from the React Course
 
 - [Javascript Fundamentals](#javascript-fundamentals)
+
   - [Destructuring](#destructuring)
   - [Ternaries](#ternaries)
   - [Traditional vs. Arrow Functions](#traditional-vs-arrow-functions)
@@ -22,20 +23,25 @@ _These are my notes from [The Ultimate React Course 2024: React, Redux & More](h
     - [Immutable Arrays](#immutable-arrays)
   - [Promises](#promises)
   - [Async/Await](#asyncawait)
+
 - [React Fundamentals](#react-fundamentals)
+
   - [Inline CSS](#inline-css)
-  - [Prop Passsing](#prop-passing)
+  - [Prop Passing](#prop-passing)
   - [State](#state)
     - [Declare a State Variable](#declare-a-state-variable)
     - [Updating State](#updating-state)
     - [Tips and Guidelines](#tips-and-guidelines)
     - [What's the Difference Between _State_ and _Props_?](#whats-the-difference-between-state-and-props)
+
 - [Thinking in React](#thinking-in-react)
+
   - [The "Thinking in React" Process](#the-thinking-in-react-process)
   - [State Management](#state-management)
     - [Types of State (Local v Global)](#types-of-state-local-v-global)
     - [When and Where to Use State](#when-and-where-to-use-state)
     - [Lifting State](#lifting-state)
+
 - [Unsorted and Miscellaneous Notes](#unsorted-and-miscellaneous-notes)
   - [Trick for Dynamic Array Creation](#trick-for-dynamic-array-creation)
   - [Prevent Reload when Submitting a Form](#prevent-reload-when-submitting-a-form)
@@ -327,15 +333,28 @@ const todos = getTodos();
 console.log(todos);
 ```
 
-## React Fundamentals
+## React
 
-### Inline CSS
+### Thinking in React
 
-Inline CSS in JSX needs two sets of curly braces:
+Thinking in react is a core skill. Need to learn how to work with the react API and think in react in order to get in the "react mindset". Thinking in react means having a good mental model about using components, state, data flow, effects, etc. It's also about think in state transitions rather than element mutations.
 
-```
-<button style={{ backgroundColor: "#7590F2" }}>Previous</button>
-```
+#### The "Thinking in React" Process
+
+This is not a rigid process, but this is the basic process for thinking in react
+
+1. Break the desired UI into components and establish a component tree.
+2. Build a static version in React (without state)
+3. Think about state:
+   - when to use state
+   - what types of state (local v global)
+   - where to place each piece of state
+4. Establish data flow:
+   - One-way data flow
+   - Child-to-parent communication
+   - Accessing global state
+
+Steps 3 and 4 in the thinking in this process comprise state management.
 
 ### Prop Passing
 
@@ -370,6 +389,16 @@ That Skill(skillObject) will not return anything, I need to wrap it in curly bra
 
 ### State
 
+### What's the Difference Between _State_ and _Props_?
+
+State is internal data owned by the component, props are external data owned by the parent component.
+
+Props are read-only, but receiving new props causes the component to re-render. Usually when the parent's state has been updated.
+
+Whenever a piece of state is passed as a prop, when the state is changed both components re-render.
+
+While state is used to make components interactive, props are used to give parent comopnents the ability to configure child components. Props can be seen as settings in child components which the parent component can manage.
+
 #### Declare a State Variable
 
 ```
@@ -401,55 +430,6 @@ This does not apply to setting state, which can be performed directly:
 ```
 setTest({ name: "R3mnan7"});
 ```
-
-#### Tips and Guidelines
-
-Each component manages it's own state. Each component instance operates independent from the others.
-
-Use a state variable for any data that the component should keep track of ("remember") over time. **This is data that will change at some point**. In Vanilla JS, that's a let variable, or and [] or {}.
-
-Whenever you want something in the component to be **dynamic**, create a piece of state related to that "thing" and update the state when the "thing" should change.
-
-**_Example_**: A modal window can be opened or closed. So we create a state variable isOpen that tracks wwhether the modal is open or not. In isOpen = true we display the window, on isOpen = false, we hide it.
-
-If you want to change the way a component looks, or the data it displays, **update its state**. This usually happens in an **event handler** function.
-
-When building components, imagine its view as a **reflection of state over time**.
-
-For data that should not trigger component re-renders, **don't use state**. Use a regular variable instead.
-
-Data can only move down the component tree, not up or sideways.
-
-#### What's the Difference Between _State_ and _Props_?
-
-State is internal data owned by the component, props are external data owned by the parent component.
-
-Props are read-only, but receiving new props causes the component to re-render. Usually when the parent's state has been updated.
-
-Whenever a piece of state is passed as a prop, when the state is changed both components re-render.
-
-While state is used to make components interactive, props are used to give parent comopnents the ability to configure child components. Props can be seen as settings in child components which the parent component can manage.
-
-## Thinking in React
-
-Thinking in react is a core skill. Need to learn how to work with the react API and think in react in order to get in the "react mindset". Thinking in react means having a good mental model about using components, state, data flow, effects, etc. It's also about think in state transitions rather than element mutations.
-
-### The "Thinking in React" Process
-
-This is not a rigid process, but this is the basic process for thinking in react
-
-1. Break the desired UI into components and establish a component tree.
-2. Build a static version in React (without state)
-3. Think about state:
-   - when to use state
-   - what types of state (local v global)
-   - where to place each piece of state
-4. Establish data flow:
-   - One-way data flow
-   - Child-to-parent communication
-   - Accessing global state
-
-Steps 3 and 4 in the thinking in this process comprise state management.
 
 ### State Management
 
@@ -535,7 +515,164 @@ function Form({ onAddItems }) {
 
 _Reference the [travel-list](https://github.com/r3mnan7/learn-react/blob/main/my-projects/travel-list/src/App.js) project for full context_
 
-## Unsorted and Miscellaneous Notes
+#### Derived State
+
+**Derived state** is state that is computer from an existing piece of state, or from props.
+
+_Example_
+
+```
+const [cart, setCart] = useState([
+  {name: "Pizza Sandwich", price: 3.50},
+  {name: "Beer", price: 4.69},
+]);
+const [numItems, setNumItems] = useState(2);
+const [totalPrice, setTotalPrice] = useState(8.19)
+```
+
+In this example, the numItems and totalPrice values can be _derived_ from the existing piece of state `cart`, as follows:
+
+```
+const [cart, setCart] = useState([
+  {name: "Pizza Sandwich", price: 3.50},
+  {name: "Beer", price: 4.69},
+]);
+const numItems = cart.length;
+const totalPrice = cart.reduce((acc, cur) => acc + cur.price, 0);
+```
+
+The `cart` state acts as a single source of truth for the related data, and when the state change re-renders the componend, the derived values will automatically recalculate.
+
+Sorting one array can be derived from another array.
+
+### Tips and Guidelines (State)
+
+Each component manages it's own state. Each component instance operates independent from the others.
+
+Use a state variable for any data that the component should keep track of ("remember") over time. **This is data that will change at some point**. In Vanilla JS, that's a let variable, or and [] or {}.
+
+Whenever you want something in the component to be **dynamic**, create a piece of state related to that "thing" and update the state when the "thing" should change.
+
+**_Example_**: A modal window can be opened or closed. So we create a state variable isOpen that tracks wwhether the modal is open or not. In isOpen = true we display the window, on isOpen = false, we hide it.
+
+If you want to change the way a component looks, or the data it displays, **update its state**. This usually happens in an **event handler** function.
+
+When building components, imagine its view as a **reflection of state over time**.
+
+For data that should not trigger component re-renders, **don't use state**. Use a regular variable instead.
+
+Data can only move down the component tree, not up or sideways.
+
+## Components
+
+### Passing Props in Nested Components
+
+For nested components, you need to pass the function all the way down the tree, **in sequence** (this tripped me up so that's why it's here).
+
+Step 1: Declare the function to pass
+
+```
+export default function App() {
+  const [items, setItems] = useState([]);
+
+
+  function handleToggleItem(id) {
+    setItems((items) =>
+      items.map((item) =>
+        item.id === id ? { ...item, packed: !item.packed } : item
+      )
+    );
+  }
+```
+
+Step 2: Pass it to the first component as a prop, then to the next component as a prop.
+
+```
+function PackingList({ items, onDeleteItem, onToggleItem }) { // HERE
+  return (
+    <div className="list">
+      <ul>
+        {items.map((item) => (
+          <Item
+            item={item}
+            onDeleteItem={onDeleteItem}
+            onToggleItem={onToggleItem} // AND HERE
+            key={item.id}
+          />
+        ))}
+      </ul>
+    </div>
+  );
+}
+```
+
+Step 3: Now pass it to it's caller.
+
+```
+function Item({ item, onDeleteItem, onToggleItem }) { // HERE
+  return (
+    <li>
+      <input
+        type="checkbox"
+        value={item.packed}
+        onChange={() => onToggleItem(item.id)} // AND HERE
+      />
+      <span style={item.packed ? { textDecoration: "line-through" } : {}}>
+        {item.quantity} {item.description}
+      </span>
+      <button onClick={() => onDeleteItem(item.id)}>❌&times;</button>
+    </li>
+  );
+}
+```
+
+Where I messed this up was passing it to the PackingList as a function param, but not to pass it to item in the line `onToggleItem={onToggleItem}`. You have to destructure the props in packing list, pass to the item component, then destructure it again, then pass it to the JSX.
+
+### Managing Components in Separate Files
+
+Create separate files under the `src` directory for each component (i.e. `Logo.js`), then write the function as a `export default` function:
+
+```
+export default function Logo() {
+  return <h1>🌴 Far Away 💼</h1>;
+}
+```
+
+Then within `App.js` import the function from the file like so:
+
+```
+import Logo from "./Logo";
+```
+
+Since this is a default function the import can be called anything as long as the same component file is called, for example:
+
+```
+import awesomeComponent from "./Logo"
+```
+
+Also need to make sure any needed imports are included in the component file (this is pretty obvious, but in case it's not 😊)
+
+_Reference the file structure in [travel-list](https://github.com/r3mnan7/learn-react/blob/main/my-projects/travel-list/src/App.js) for more context_
+
+#### Automagic
+
+If an `App.js` has already been created with numerous components, VSCode has a refactor option to create separate files automatically. Simply highlight the entire function, right click > refactor, then click _Move to a new file_.
+
+This may require some manual refactoring, but it saves a step and a lot of work in most cases. Also this method uses named exports, so you'll need to change that (as a common convention, not a hard and fast rule per se).
+
+You can also move all these files to a separate `components` folder (or whatever else you want to call it), making sure to change the import statement within `index.js` when you do.
+
+## Miscellaneous Notes
+
+### Inline CSS
+
+Inline CSS in JSX needs two sets of curly braces:
+
+```
+<button style={{ backgroundColor: "#7590F2" }}>Previous</button>
+```
+
+### Render Arrays with a Key
 
 When rendering an array in react, you always need to pass in a key, like this:
 
