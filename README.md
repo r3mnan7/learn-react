@@ -3,7 +3,6 @@ These are not my individual notes on how to work with Javascript and React, but 
 # Notes from the React Course
 
 - [Javascript Fundamentals](#javascript-fundamentals)
-
   - [Destructuring](#destructuring)
   - [Ternaries](#ternaries)
   - [Traditional vs. Arrow Functions](#traditional-vs-arrow-functions)
@@ -23,9 +22,7 @@ These are not my individual notes on how to work with Javascript and React, but 
     - [Immutable Arrays](#immutable-arrays)
   - [Promises](#promises)
   - [Async/Await](#asyncawait)
-
 - [React](#react)
-
   - [Thinking in React](#thinking-in-react)
     - [The "Thinking in React" Process](#the-thinking-in-react-process)
   - [Prop Passing](#prop-passing)
@@ -44,7 +41,6 @@ These are not my individual notes on how to work with Javascript and React, but 
   - [Components](#components)
     - [Passing Props in Nested Components](#passing-props-in-nested-components)
     - [Managing Components in Separate Files](#managing-components-in-separate-files)
-
 - [Miscellaneous Notes](#miscellaneous-notes)
   - [Inline CSS](#inline-css)
   - [Render Arrays with a Key](#render-arrays-with-a-key)
@@ -518,7 +514,7 @@ function Form({ onAddItems }) {
   }
 ```
 
-_Reference the [travel-list](https://github.com/r3mnan7/learn-react/blob/main/my-projects/travel-list/src/App.js) project for full context_
+_Reference the [travel-list](https://github.com/r3mnan7/learn-react/blob/main/my-projects/travel-list/src/components/App.js) project for full context_
 
 #### Derived State
 
@@ -657,7 +653,7 @@ import awesomeComponent from "./Logo"
 
 Also need to make sure any needed imports are included in the component file (this is pretty obvious, but in case it's not 😊)
 
-_Reference the file structure in [travel-list](https://github.com/r3mnan7/learn-react/blob/main/my-projects/travel-list/src/App.js) for more context_
+_Reference the file structure in [travel-list](https://github.com/r3mnan7/learn-react/blob/main/my-projects/travel-list/src/components/App.js) for more context_
 
 ##### Automagic
 
